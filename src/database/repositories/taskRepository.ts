@@ -34,14 +34,18 @@ export async function createTask(task: Task) {
       task.repeatType,
       task.createdAt,
       task.updatedAt,
-    ]
+    ],
   );
 }
 
 export async function getAllTasks(): Promise<Task[]> {
   const db = await getDatabase();
 
-  return await db.getAllAsync<Task>(
-    `SELECT * FROM tasks ORDER BY dueDate ASC`
-  );
+  return await db.getAllAsync<Task>(`SELECT * FROM tasks ORDER BY dueDate ASC`);
+}
+
+export async function deleteAllTasks() {
+  const db = await getDatabase();
+
+  await db.runAsync("DELETE FROM tasks");
 }

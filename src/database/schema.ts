@@ -15,17 +15,28 @@ export async function initializeDatabase() {
       category TEXT NOT NULL,
       priority TEXT NOT NULL,
 
-      status TEXT NOT NULL,
-
-      dueDate TEXT NOT NULL,
-      dueTime TEXT,
+      repeatType TEXT NOT NULL,
 
       reminder TEXT,
 
-      repeatType TEXT NOT NULL,
+      isArchived INTEGER DEFAULT 0,
 
       createdAt TEXT NOT NULL,
       updatedAt TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS task_instances (
+      id TEXT PRIMARY KEY NOT NULL,
+
+      taskId TEXT NOT NULL,
+
+      taskDate TEXT NOT NULL,
+
+      status TEXT NOT NULL,
+
+      completedAt TEXT,
+
+      FOREIGN KEY(taskId) REFERENCES tasks(id)
     );
   `);
 }
