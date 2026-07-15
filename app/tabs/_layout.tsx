@@ -1,8 +1,5 @@
 import { Tabs } from "expo-router";
-import {
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   return (
@@ -21,7 +18,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Dashboard",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
@@ -39,45 +36,31 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="calendar"
+        name="attendance"
         options={{
-          title: "Calendar",
+          title: "Attendance",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="calendar" size={size} color={color} />
+            <Ionicons name="school" size={size} color={color} />
           ),
         }}
       />
 
       <Tabs.Screen
-        name="habits"
+        name="expenses"
         options={{
-          title: "Habits",
+          title: "Expenses",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="fire"
-              size={size}
-              color={color}
-            />
+            <Ionicons name="wallet" size={size} color={color} />
           ),
         }}
       />
 
       <Tabs.Screen
-        name="analytics"
+        name="profile"
         options={{
-          title: "Stats",
+          title: "Profile",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="stats-chart" size={size} color={color} />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings" size={size} color={color} />
+            <Ionicons name="person" size={size} color={color} />
           ),
         }}
       />

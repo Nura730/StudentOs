@@ -1,5 +1,5 @@
-import { View } from "react-native";
-import Button from "../../src/components/ui/Button";
+import { View, Text } from "react-native";
+import Card from "../../src/components/ui/Card";
 
 export default function Home() {
   return (
@@ -10,10 +10,9 @@ export default function Home() {
         padding: 20,
       }}
     >
-      <Button
-        title="StudentOS"
-        onPress={() => console.log("Pressed")}
-      />
+      <Card>
+        <Text>Welcome to StudentOS 🚀</Text>
+      </Card>
     </View>
   );
 }
