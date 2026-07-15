@@ -49,3 +49,23 @@ export async function deleteAllTasks() {
 
   await db.runAsync("DELETE FROM tasks");
 }
+export async function updateTaskStatus(
+  id: string,
+  status: "pending" | "completed"
+) {
+  const db = await getDatabase();
+
+  await db.runAsync(
+    `UPDATE tasks SET status=? WHERE id=?`,
+    [status, id]
+  );
+}
+
+export async function deleteTask(id: string) {
+  const db = await getDatabase();
+
+  await db.runAsync(
+    `DELETE FROM tasks WHERE id=?`,
+    [id]
+  );
+}
