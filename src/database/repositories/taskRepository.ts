@@ -56,8 +56,37 @@ export async function updateTaskStatus(
   const db = await getDatabase();
 
   await db.runAsync(
-    `UPDATE tasks SET status=? WHERE id=?`,
-    [status, id]
+    `UPDATE tasks
+     SET status = ?, updatedAt = ?
+     WHERE id = ?`,
+    [status, new Date().toISOString(), id]
+  );
+}
+
+export async function updateTask(task: Task) {
+  const db = await getDatabase();
+
+  await db.runAsync(
+    `UPDATE tasks
+     SET
+      title=?,
+      description=?,
+      category=?,
+      priority=?,
+      reminder=?,
+      repeatType=?,
+      updatedAt=?
+     WHERE id=?`,
+    [
+      task.title,
+      task.description ?? null,
+      task.category,
+      task.priority,
+      task.reminder ?? null,
+      task.repeatType,
+      new Date().toISOString(),
+      task.id,
+    ]
   );
 }
 
@@ -68,4 +97,15 @@ export async function deleteTask(id: string) {
     `DELETE FROM tasks WHERE id=?`,
     [id]
   );
+}
+
+export async function getTaskById(id: string): Promise<Task | null> {
+  const db = await getDatabase();
+
+  const task = await db.getFirstAsync<Task>(
+    `SELECT * FROM tasks WHERE id=?`,
+    [id]
+  );
+
+  return task ?? null;
 }
