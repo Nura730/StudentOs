@@ -20,24 +20,28 @@ export type TaskRepeat =
   | "monthly";
 
 export interface Task {
-  id: string;
+    id: string;
 
-  title: string;
-  description?: string;
+    title: string;
+    description?: string;
 
-  category: TaskCategory;
+    category: string;
 
-  priority: TaskPriority;
+    priority: "low" | "medium" | "high";
 
-  status: TaskStatus;
+    status: "pending" | "completed";
 
-  dueDate: string;
-  dueTime?: string;
+    dueDate: string;
+    dueTime?: string;
 
-  reminder?: string;
+    reminder?: string;
 
-  repeatType: TaskRepeat;
+    repeatType:
+        | "none"
+        | "daily"
+        | "weekly"
+        | "monthly";
 
-  createdAt: string;
-  updatedAt: string;
+    createdAt: string;
+    updatedAt: string;
 }

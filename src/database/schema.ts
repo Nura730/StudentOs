@@ -13,11 +13,17 @@ export async function initializeDatabase() {
       description TEXT,
 
       category TEXT NOT NULL,
+
       priority TEXT NOT NULL,
 
-      repeatType TEXT NOT NULL,
+      status TEXT NOT NULL,
+
+      dueDate TEXT,
+      dueTime TEXT,
 
       reminder TEXT,
+
+      repeatType TEXT NOT NULL,
 
       isArchived INTEGER DEFAULT 0,
 
@@ -25,18 +31,60 @@ export async function initializeDatabase() {
       updatedAt TEXT NOT NULL
     );
 
-    CREATE TABLE IF NOT EXISTS task_instances (
-      id TEXT PRIMARY KEY NOT NULL,
+    CREATE TABLE IF NOT EXISTS notes (
+      id TEXT PRIMARY KEY,
+      title TEXT,
+      content TEXT,
+      folder TEXT,
+      color TEXT,
+      createdAt TEXT,
+      updatedAt TEXT
+    );
 
-      taskId TEXT NOT NULL,
+    CREATE TABLE IF NOT EXISTS expenses (
+      id TEXT PRIMARY KEY,
+      title TEXT,
+      amount REAL,
+      type TEXT,
+      category TEXT,
+      paymentMethod TEXT,
+      note TEXT,
+      date TEXT,
+      createdAt TEXT
+    );
 
-      taskDate TEXT NOT NULL,
+    CREATE TABLE IF NOT EXISTS goals (
+      id TEXT PRIMARY KEY,
+      title TEXT,
+      target INTEGER,
+      current INTEGER,
+      deadline TEXT,
+      completed INTEGER DEFAULT 0
+    );
 
-      status TEXT NOT NULL,
+    CREATE TABLE IF NOT EXISTS habits (
+      id TEXT PRIMARY KEY,
+      title TEXT,
+      frequency TEXT,
+      currentStreak INTEGER,
+      bestStreak INTEGER,
+      lastCompleted TEXT
+    );
 
-      completedAt TEXT,
+    CREATE TABLE IF NOT EXISTS categories (
+      id TEXT PRIMARY KEY,
+      name TEXT,
+      icon TEXT,
+      color TEXT
+    );
 
-      FOREIGN KEY(taskId) REFERENCES tasks(id)
+    CREATE TABLE IF NOT EXISTS passwords (
+      id TEXT PRIMARY KEY,
+      title TEXT,
+      username TEXT,
+      password TEXT,
+      website TEXT,
+      notes TEXT
     );
   `);
 }
