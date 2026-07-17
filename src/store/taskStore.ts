@@ -23,47 +23,39 @@ interface TaskStore {
   editTask(task: Task): Promise<void>;
 }
 
-export const useTaskStore = create<TaskStore>((set) => ({
-  tasks: [],
-
-  loadTasks: async () => {
+export const useTaskStore = create<TaskStore>((set) => {
+  const refresh = async () => {
     set({
       tasks: await getAllTasks(),
     });
-  },
+  };
 
-  addTask: async (task) => {
-    await createTask(task);
+  return {
+    tasks: [],
 
-    set({
-      tasks: await getAllTasks(),
-    });
-  },
+    loadTasks: refresh,
 
-  toggleTask: async (id, completed) => {
-    await updateTaskStatus(
-      id,
-      completed ? "completed" : "pending"
-    );
+    addTask: async (task) => {
+      await createTask(task);
+      await refresh();
+    },
 
-    set({
-      tasks: await getAllTasks(),
-    });
-  },
+    toggleTask: async (id, completed) => {
+      await updateTaskStatus(
+        id,
+        completed ? "completed" : "pending"
+      );
+      await refresh();
+    },
 
-  removeTask: async (id) => {
-    await deleteTask(id);
+    removeTask: async (id) => {
+      await deleteTask(id);
+      await refresh();
+    },
 
-    set({
-      tasks: await getAllTasks(),
-    });
-  },
-
-  editTask: async (task) => {
-    await updateTask(task);
-
-    set({
-      tasks: await getAllTasks(),
-    });
-  },
-}));
+    editTask: async (task) => {
+      await updateTask(task);
+      await refresh();
+    },
+  };
+});

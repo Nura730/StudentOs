@@ -1,15 +1,19 @@
-import { View, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
+import TaskHeader from "../../src/components/tasks/TaskHeader";
 
-export default function Screen() {
+export default function TasksScreen() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Coming Soon 🚀</Text>
+    <View style={styles.container}>
+      <TaskHeader />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#0D1117",
+    paddingHorizontal: 20,
+    paddingTop: 60,
+  },
+});
