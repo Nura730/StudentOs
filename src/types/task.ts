@@ -7,41 +7,50 @@ export type TaskCategory =
   | "fitness"
   | "editing"
   | "career"
+  | "home"
+  | "shopping"
   | "other";
 
 export type TaskPriority = "low" | "medium" | "high";
 
-export type TaskStatus = "pending" | "completed";
+export type TaskStatus =
+  | "pending"
+  | "completed"
+  | "missed"
+  | "cancelled";
 
 export type TaskRepeat =
   | "none"
   | "daily"
   | "weekly"
-  | "monthly";
+  | "monthly"
+  | "yearly";
 
 export interface Task {
-    id: string;
+  id: string;
 
-    title: string;
-    description?: string;
+  title: string;
+  description?: string;
 
-    category: string;
+  category: TaskCategory;
 
-    priority: "low" | "medium" | "high";
+  priority: TaskPriority;
 
-    status: "pending" | "completed";
+  status: TaskStatus;
 
-    dueDate: string;
-    dueTime?: string;
+  dueDate: string;
+  dueTime?: string;
 
-    reminder?: string;
+  reminder?: string;
 
-    repeatType:
-        | "none"
-        | "daily"
-        | "weekly"
-        | "monthly";
+  repeatType: TaskRepeat;
 
-    createdAt: string;
-    updatedAt: string;
+  isPinned: boolean;
+
+  isArchived: boolean;
+
+  completedAt?: string;
+
+  createdAt: string;
+  updatedAt: string;
 }
